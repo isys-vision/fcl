@@ -92,10 +92,12 @@ void OcTree<S>::computeLocalAABB()
 template <typename S>
 AABB<S> OcTree<S>::getRootBV() const
 {
-  S delta = (1 << tree->getTreeDepth()) * tree->getResolution() / 2;
+  S x_min, y_min, z_min, x_max, y_max, z_max;
+  tree->getMetricMin(x_min, y_min, z_min);
+  tree->getMetricMax(x_max, y_max, z_max);
 
-  // std::cout << "octree size " << delta << std::endl;
-  return AABB<S>(Vector3<S>(-delta, -delta, -delta), Vector3<S>(delta, delta, delta));
+  // std::cout << "octree dimensions " << x_min << " " <<  x_max << " y: " << y_min << " " << y_max << " z: " << z_min << " " << z_max  << std::endl;
+  return AABB<S>(Vector3<S>(x_min, y_min, z_min), Vector3<S>(x_max, y_max, z_max));
 }
 
 //==============================================================================
