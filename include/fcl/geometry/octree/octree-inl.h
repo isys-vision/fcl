@@ -100,6 +100,17 @@ AABB<S> OcTree<S>::getRootBV() const
 
 //==============================================================================
 template <typename S>
+AABB<S> OcTree<S>::getOccupiedBV() const
+{
+    S x_min, y_min, z_min, x_max, y_max, z_max;
+    tree->getMetricMin(x_min, y_min, z_min);
+    tree->getMetricMax(x_max, y_max, z_max);
+
+    return AABB<S>(Vector3<S>(x_min, y_min, z_min), Vector3<S>(x_max, y_max, z_max));
+}
+
+//==============================================================================
+template <typename S>
 typename OcTree<S>::OcTreeNode* OcTree<S>::getRoot() const
 {
   return tree->getRoot();

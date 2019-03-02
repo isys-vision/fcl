@@ -111,6 +111,16 @@ void OcTreeSolver<NarrowPhaseSolver>::OcTreeMeshIntersect(
   crequest = &request_;
   cresult = &result_;
 
+  AABB<S> aabb1 = tree1->getOccupiedBV();
+  OBB<S> obb1, obb2;
+  convertBV(aabb1, tf1, obb1);
+  convertBV(tree2->getBV(0).bv, tf2, obb2);
+  if (!obb1.overlap(obb2))
+  {
+//      std::cout << "Filtered" << std::endl;
+      return;
+  }
+
   OcTreeMeshIntersectRecurse(tree1, tree1->getRoot(), tree1->getRootBV(),
                              tree2, 0,
                              tf1, tf2);

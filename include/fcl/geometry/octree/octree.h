@@ -81,6 +81,9 @@ public:
   /// @brief get the bounding volume for the root
   AABB<S> getRootBV() const;
 
+  /// @brief get the bounding volume of the occupied part of the tree
+  AABB<S> getOccupiedBV() const;
+
   /// @brief get the root node of the octree
   OcTreeNode* getRoot() const;
 
